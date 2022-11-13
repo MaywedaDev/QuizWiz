@@ -1,0 +1,36 @@
+<div class="main container-fluid min-vh-100 d-flex flex-column align-items-center justify-content-center">
+	<img class="home-img" src="../../assets/images/4119036.jpg">
+	<h1>{{ title }}</h1>
+	<p>Take a Quiz to expand your Knowledge</p>
+	<button class="btn bg-col fw-bold text-light shadow-lg" (click)="goToTests()">Let's Go</button>
+	<span class="fw-bold mt-1">We have <span class="fs-2 length">{{ quizLength }}</span> different tests for you</span>
+</div>
+<div class="contact">
+	<ul class="d-flex flex-sm-column justify-content-around h-100 w-100 align-items-center px-3">
+		<li>
+			<a href="#">
+				<fa-icon [icon]="faIcons.faFacebook" size="2x"></fa-icon>
+			</a>
+		</li>
+		<li>
+			<a href="#">
+				<fa-icon [icon]="faIcons.faTwitter" size="2x"></fa-icon>
+			</a>
+		</li>
+		<li>
+			<a href="#">
+				<fa-icon [icon]="faIcons.faGithub" size="2x"></fa-icon>
+			</a>
+		</li>
+		<li>
+			<a href="#">
+				<fa-icon [icon]="faIcons.faEnvelope" size="2x"></fa-icon>
+			</a>
+		</li>
+	</ul>
+</div>
+
+
+
+
+

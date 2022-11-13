@@ -1,0 +1,46 @@
+
+@import '../../styles/variables';
+
+.home-img{
+	width: 300px;
+	object-fit: scale-down;
+}
+
+.length{
+	color: $primary;
+	text-shadow: $text-shadow;
+}
+
+.contact{
+	position: fixed;
+	top: 56px;
+	right: 0;
+	height: calc(100% - 56px);
+	border-left: 2px dashed grey;
+
+	 li{
+		list-style: none;
+
+		a{
+			color: $primary;
+			filter: $shadow;
+
+			&:hover{
+				color: var(--bs-blue);
+			}
+		}
+	}
+}
+
+
+
+
+@media screen and (max-width: 576px){
+	.contact{
+		position: relative;
+		height: 70px;
+		width: 100%;
+		border-left: none;
+		border-top: 2px dashed grey;
+	}
+}

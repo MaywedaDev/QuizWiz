@@ -1,0 +1,61 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&display=swap');
+
+@import '../../node_modules/bootstrap/scss/bootstrap';
+@import './variables';
+
+@mixin test-hover(){
+	background-color: $green-100 !important;
+	border-color: $primary !important;
+	color: $primary !important;
+	transition: all 0.4s linear;
+	cursor: pointer;
+}
+
+
+.bg-col{
+	background-color: $primary;
+}
+
+button{
+
+	&.bg-col{
+	@extend .bg-col;
+
+		&:hover{
+		background-color: var(--bs-blue);
+		}
+
+		&:focus{
+		background-color: var(--bs-blue);
+		outline: none !important;
+		box-shadow: 0 0 0 0.25rem $bx-outline !important;
+		}
+	}
+}
+
+.test{
+	.content{
+		&:hover{
+			@include test-hover();
+		}
+	}
+	
+}
+
+
+body{
+	min-height: 100vh;
+	font-family:'Source Sans Pro', sans-serif;
+}
+
+.error{
+	color: $danger;
+	min-height: 60vh;
+}
+
+.sm-txt{
+	font-size: small;
+}
+

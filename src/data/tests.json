@@ -1,0 +1,124 @@
+{
+   "tests": [
+      {
+         "name": "Maths",
+         "questions": 19,
+         "maxTime": 855,
+         "id": "maths"
+      },
+      {
+         "name": "English",
+         "questions": 18,
+         "maxTime": 810,
+         "id": "english"
+      },
+      {
+         "name": "Literature",
+         "questions": 15,
+         "maxTime": 675,
+         "id": "literature"
+      },
+      {
+         "name": "Movies",
+         "questions": 21,
+         "maxTime": 945,
+         "id": "movies"
+      },
+      {
+         "name": "Anime",
+         "questions": 20,
+         "maxTime": 900,
+         "id": "anime"
+      },
+      {
+         "name": "History",
+         "questions": 18,
+         "maxTime": 810,
+         "id": "history"
+      },
+      {
+         "name": "Football",
+         "questions": 19,
+         "maxTime": 855,
+         "id": "football"
+      },
+      {
+         "name": "Science",
+         "questions": 18,
+         "maxTime": 810,
+         "id": "science"
+      },
+      {
+         "name": "Technology",
+         "questions": 22,
+         "maxTime": 990,
+         "id": "technology"
+      },
+      {
+         "name": "Programming",
+         "questions": 22,
+         "maxTime": 990,
+         "id": "programming"
+      },
+      {
+         "name": "Afro Beats",
+         "questions": 22,
+         "maxTime": 990,
+         "id": "afro beats"
+      },
+      {
+         "name": "Music",
+         "questions": 19,
+         "maxTime": 855,
+         "id": "music"
+      },
+      {
+         "name": "General Sports",
+         "questions": 21,
+         "maxTime": 945,
+         "id": "general sports"
+      },
+      {
+         "name": "Gaming",
+         "questions": 17,
+         "maxTime": 765,
+         "id": "gaming"
+      },
+      {
+         "name": "Physics",
+         "questions": 17,
+         "maxTime": 765,
+         "id": "physics"
+      },
+      {
+         "name": "Engineering",
+         "questions": 16,
+         "maxTime": 720,
+         "id": "engineering"
+      },
+      {
+         "name": "General Knowlegde",
+         "questions": 20,
+         "maxTime": 900,
+         "id": "general knowlegde"
+      },
+      {
+         "name": "Riddles",
+         "questions": 18,
+         "maxTime": 810,
+         "id": "riddles"
+      },
+      {
+         "name": "Animals",
+         "questions": 21,
+         "maxTime": 945,
+         "id": "animals"
+      },
+      {
+         "name": "Human Culture",
+         "questions": 18,
+         "maxTime": 810,
+         "id": "human culture"
+      }
+   ]
+}
