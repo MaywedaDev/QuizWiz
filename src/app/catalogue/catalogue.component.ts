@@ -9,7 +9,7 @@ import { faCircleQuestion, faClock } from '@fortawesome/free-regular-svg-icons';
   styleUrls: ['./catalogue.component.scss']
 })
 export class CatalogueComponent implements OnInit {
-  tests: Quiz[] | undefined
+  tests: any[] | undefined
   name: string | undefined
   faIcons = {
     faCircleQuestion, faClock
@@ -21,16 +21,15 @@ export class CatalogueComponent implements OnInit {
 
   ngOnInit(): void {
     this.quizzesService.getTests().subscribe((response: any) => {
-      this.tests = response
+      this.tests = response.tests
       this.errorMsg = undefined;
+      console.log(this.tests)
     },
     (error: any) => {
       console.error('error caught in component');
       this.tests = undefined; 
       this.errorMsg = 'There is a problem with your internet connection';
     })
-
-    console.log(this.tests)
   }
 
 }

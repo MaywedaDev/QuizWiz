@@ -44,6 +44,22 @@ button{
 	
 }
 
+.option{
+	.content{
+		&:hover{
+			@include test-hover()
+		}
+		&.selected{
+			@include test-hover();
+		}
+		&.incorrect{
+			background-color: $red-100 !important;
+			border-color: $red !important;
+			color: $red !important;
+		}
+	}
+}
+
 
 body{
 	min-height: 100vh;

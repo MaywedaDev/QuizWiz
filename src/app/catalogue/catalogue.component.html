@@ -1,27 +1,28 @@
 
-<div class="test-page px-3 container-fluid row justify-content-center">
+<div class="test-page px-3 px-xl-5 container-fluid row justify-content-center">
 	<h1 class="my-2">Quizzes</h1>
-	<div class="col-md-8 col-12 my-2">
+	<div class="col-md-8 col-12 my-2 col-xl-6">
 		<input type="text" name="" [(ngModel)]="name" class="form-control" placeholder="Search for any Quiz...">
 	</div>
 	<div class="mt-2 py-3 px-3 d-flex justify-content-center align-items-center error" *ngIf="errorMsg">
 		<h2 class="d-inline-block">{{ errorMsg }}</h2>
 	</div>
-	<div *ngIf="tests" class="test-grid col-12 row my-2">
+	<div *ngIf="tests" class="test-grid col-12 row my-2 col-xl-10 px-xl-5">
 		<div *ngFor="let test of (tests | filter:name)" class="test mt-2 col-md-4 col-sm-6 col-12">
-			<div class="content py-3 px-3 border-4 border rounded">
-				<h3 class="fs-4 fw-semibold text-center"><a [routerLink]=' "/test/" + test.id '>{{ test.name }}</a></h3>
-				<div class="d-flex justify-content-around">
-					<span class="sm-txt fw-semibold"> <fa-icon [icon]="faIcons.faCircleQuestion"></fa-icon>
-					{{ test.questions }}
-					</span>
-					<span class="sm-txt fw-semibold"><fa-icon [icon]="faIcons.faClock"></fa-icon>
-					{{ test.maxTime }}</span>
+			<a [routerLink]=' "/test/" + test.id' [queryParams]="{limit: test.questions}">
+				<div class="content py-3 px-3 border-4 border rounded">
+					<h3 class="fs-4 fw-semibold text-center">{{ test.name }}</h3>
+					<div class="d-flex justify-content-around">
+						<span class="sm-txt fw-semibold"> <fa-icon [icon]="faIcons.faCircleQuestion"></fa-icon>
+						{{ test.questions }}
+						</span>
+						<span class="sm-txt fw-semibold"><fa-icon [icon]="faIcons.faClock"></fa-icon>
+						{{ test.maxTime }}</span>
+					</div>
 				</div>
-			</div>
+			</a>
 		</div>
 	</div>
-	
 </div>
 
 

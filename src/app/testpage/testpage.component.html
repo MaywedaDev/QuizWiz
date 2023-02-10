@@ -1,28 +1,139 @@
-<div class="test-page container-fluid mt-3 px-4">
-	<h1 class="text-capitalize">{{ name }} test</h1>
-	<div class="info">
-		<p>You have selected the <span class="text-capitalize">{{ name }}</span> test.<br>In order to pass this test, Please carefully read the instructions below before you start the test.</p>
-		<div class="ist mt-3 px-4 py-5 border rounded row justify-content-center">
-			<h4 class="fw-semibold col-12">Test instructions</h4>
-			<p class="col-12">
-				The test duration is about 13 minutes, and comprises of 18 multiple choice questions. The pass mark is 60%. You can change the answer of any question at any time so long the test isn't submitted.<br><br>
+<div class="test-page container-fluid mt-3 px-4 d-flex flex-column">
+	<div class="mt-2 py-3 px-3 d-flex justify-content-center align-items-center error" *ngIf="errorMsg">
+		<h2 class="d-inline-block">{{ errorMsg }}</h2>
+	</div>
+	<div class="quiz_info" *ngIf="state=='Pending' && !errorMsg">
+		<h1 class="text-capitalize">{{ quizName }} test</h1>
+		<div class="info">
+			<p>You have selected the <span class="text-capitalize">{{ quizName }}</span> test.<br>In order to pass this test, Please carefully read the instructions below before you start the test.</p>
+			<div class="ist mt-3 px-4 py-5 border rounded row justify-content-center">
+				<h4 class="fw-semibold col-12">Test instructions</h4>
+				<p class="col-12">
+					The test duration is about {{ displayedTime.minutes }} minutes and {{ displayedTime.seconds }} seconds, and comprises of {{ limit }} multiple choice questions. The pass mark is 60%. You can change the answer of any question at any time so long the test isn't submitted.<br><br>
 
-				Please note that once you begin the test, it can't be stopped or canceled until it's submitted, or you force exit out of the Quiz app.<br><br>
+					Please note that once you begin the test, it can't be stopped or canceled until it's submitted, or you force exit out of the Quiz app.<br><br>
 
-				Make sure you have power and good connectivity on your device before you begin, so as to avoid errors. Also, you can choose to be prepared with a paper, pen and calculator for Math-related tests. You may need it.<br><br>
+					Make sure you have power and good connectivity on your device before you begin, so as to avoid errors. Also, you can choose to be prepared with a paper, pen and calculator for Math-related tests. You may need it.<br><br>
 
-				After you submit the test, your score will be calculated in percentages, and you can go review which questions you passed or failed in the Quiz. Good Luck!
-			</p>
-			<div class="col-12 col-md-8">
-				<button class="btn bg-col fw-bold text-light shadow-lg btn-lg d-block w-100">Start Quiz</button>
-			</div>	
+					After you submit the test, your score will be calculated in percentages, and you can go review which questions you passed or failed in the Quiz. Good Luck!
+				</p>
+				<div class="col-12 col-md-8">
+					<button class="btn bg-col fw-bold text-light shadow-lg btn-lg d-block w-100" (click)="startQuiz()" [disabled]="quizQuestions.length < 1">Start Quiz</button>
+				</div>	
+			</div>
+		</div>
+	</div>
+	<div *ngIf="state==='Started'" class="quiz_details p-3 mx-md-4 mx-2 d-flex justify-content-between border rounded">
+		<h4 class="name text-capitalize">{{ quizName}}</h4>
+		<h4 class="time"><fa-icon [icon]="faIcons.faClock"></fa-icon> {{ remainingTime.minutes }} : {{ remainingTime.seconds }} </h4>
+	</div>
+	<div class="controller mt-3 px-md-4 px-2 d-flex justify-content-center " *ngIf="state=='Started'">
+		<div class="switch_ctrls border rounded p-3 d-flex flex-column justify-content-between">
+			<div class="d-flex flex-wrap justify-content-between align-items-start align-content-start">
+				<button *ngFor="let ctrl of quizQuestions; let i = index" [class]="quizQuestions[i].selectedIndex !== null ? 'btn btn-info mb-2': 'btn btn-danger mb-2'" (click)="setQuestion(i)">
+					<fa-icon [icon]="quizQuestions[i].selectedIndex !== null ? faIcons.faCheck : faIcons.faExclamation"></fa-icon>
+				</button>
+			</div>
+			<div class="button-help d-none d-md-block">
+				<div>
+					<button  class="btn btn-danger mb-2" >
+						<fa-icon [icon]="faIcons.faExclamation"></fa-icon>
+					</button>
+					<p>Not answered</p>
+				</div>
+				<div>
+					<button  class="btn btn-info mb-2" >
+						<fa-icon [icon]="faIcons.faCheck"></fa-icon>
+					</button>
+					<p>Answered</p>
+				</div>
+			</div>
+		</div>
+		<div class="quiz_ctrl border rounded p-3">
+			<div class="quiz_question" *ngIf="displayedQuestion">
+				<div class="question mb-5">
+				<h3 class="fs-4 fw-semibold"> {{currentQuestion + 1}}.  {{ displayedQuestion.question }}</h3>
+				</div>
+				<div class="answers row">
+					<div class="option my-2 col-sm-6 col-12" *ngFor="let option of displayedQuestion.options; let i=index">
+						<div class="content py-3 px-3 border-4 border rounded" [class.selected]="displayedQuestion.selectedIndex === i" (click)="displayedQuestion.selectedIndex = i">
+							<p class="fs-5 fw-semibold mx-0 my-0 p-2">{{i + 1}}. {{ option }}</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="controls d-flex justify-content-center">
+				<button class="btn btn-info m-2" (click)="prev()">Previous</button>
+				<button *ngIf="currentQuestion < quizQuestions.length - 1" class="btn btn-warning m-2" (click)="next()">Next</button>
+				<button *ngIf="currentQuestion == quizQuestions.length - 1" class="btn btn-success m-2" (click)="endQuiz()">Submit</button>
+			</div>
+		</div>
+	</div>
+	<div *ngIf="state==='Ended'" class="results p-3 mx-md-4 row rounded align-items-stretch">
+		<div class="col-md-6 col-12 d-none d-md-block">
+			<div class="border rounded mx-2 p-2 d-flex flex-column align-items-center result_content justify-content-between text-center">
+				<h2 [class]="quizResult.passed ? 'text-success' : 'text-danger' ">{{ quizResult.passed ? 'Great Effort in the Quiz' : "You'll do better next time" }}</h2>
+				<div class="w-100">
+					<img [src]="quizResult.passed ? '../../assets/images/genuis.png' : '../../assets/images/sad.png' " alt="">
+				</div>
+				<p>{{ quizResult.passed ? 'You are a genius!' : "I admire your effort!" }}</p>
+			</div>
+		</div>
+		<div class="col-md-6 col-12">
+			<div class="border rounded mx-md-2 p-2 d-flex flex-column align-items-center result_content text-center">
+				<p >{{ quizResult.status }}</p>
+				<h2 [class]="quizResult.passed ? 'text-success' : 'text-danger' ">{{ quizResult.msg }}</h2>
+				<p class="fs-3">You scored </p> 
+				<p class="fs-1"> {{ (this.questionsPassed / this.quizQuestions.length ) * 100 | number: '1.0-0' }}%</p> <p class="fs-3">or {{ this.questionsPassed }} out of {{ this.quizQuestions.length }} question</p>
+				<p>And you attempted 11 out of {{ this.quizQuestions.length }} questions</p>
+				<button class="btn btn-success my-auto" (click)="state='In Review'">Review Answers</button>
+				<button class="btn btn-success my-auto" (click)="back()" >Take another Quiz</button>
+			</div>
+		</div>
+		
+	</div>
+	<div class="review mt-3 px-md-4 px-2 d-flex justify-content-center" *ngIf="state=='In Review'">
+		<div class="switch_ctrls border rounded p-3  d-flex flex-column justify-content-between">
+			<div class="d-flex flex-wrap justify-content-between align-items-start align-content-start">
+				<button *ngFor="let ctrl of quizQuestions; let i = index" [class]="quizQuestions[i].selectedIndex == quizQuestions[i].correctIndex ? 'btn btn-info mb-2': 'btn btn-danger mb-2'" (click)="setQuestion(i)">
+					<fa-icon [icon]="quizQuestions[i].selectedIndex == quizQuestions[i].correctIndex ? faIcons.faCheck : faIcons.faCancel"></fa-icon>
+				</button>
+			</div>
+			<div class="button-help d-none d-md-block">
+				<div>
+					<button  class="btn btn-danger mb-2" >
+						<fa-icon [icon]="faIcons.faCancel"></fa-icon>
+					</button>
+					<p>Failed</p>
+				</div>
+				<div>
+					<button  class="btn btn-info mb-2" >
+						<fa-icon [icon]="faIcons.faCheck"></fa-icon>
+					</button>
+					<p>Passed</p>
+				</div>
+			</div>
+		</div>
+		<div class="quiz_ctrl border rounded p-3">
+			<div class="quiz_question" *ngIf="displayedQuestion">
+				<div class="question mb-5">
+				<h3 class="fs-4 fw-semibold"> {{currentQuestion + 1}}.  {{ displayedQuestion.question }}</h3>
+				</div>
+				<div class="answers row">
+					<div class="option my-2 col-sm-6 col-12" *ngFor="let option of displayedQuestion.options; let i=index">
+						<div class="content py-3 px-3 border-4 border rounded" [class.selected]="displayedQuestion.correctIndex === i" [class.incorrect]="displayedQuestion.selectedIndex === i && displayedQuestion.selectedIndex !== displayedQuestion.correctIndex || displayedQuestion.selectedIndex === null &&  displayedQuestion.correctIndex !== i">
+							<p class="fs-5 fw-semibold mx-0 my-0 p-2">{{i + 1}}. {{ option }}</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="controls d-flex justify-content-center">
+				<button class="btn btn-info m-2" (click)="prev()">Previous</button>
+				<button *ngIf="currentQuestion < quizQuestions.length - 1" class="btn btn-warning m-2" (click)="next()">Next</button>
+				<button *ngIf="currentQuestion == quizQuestions.length - 1" class="btn btn-success m-2" (click)="back()" >Go to quizzes</button>
+			</div>
 		</div>
 	</div>
 </div>
 
-<div class="container-fluid mt-4">
-	<p class="sm-txt">
-		<span class="fw-bold">Note: </span>There might be wrong answers or grammatical errors due to the very limited knowledge of I, the developer of this site, which I apologize in advance for. If there are you can easily reach out to me on <a href="#">Twitter</a>
-	</p>
-</div>
 

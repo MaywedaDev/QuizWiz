@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.quizzesService.getTests().subscribe((data: any) => {
-      this.quizLength = data.length;
+      this.quizLength = data.tests.length;
     })
   }
 

@@ -1,0 +1,82 @@
+{
+   "tests": [
+      {
+         "name": "Arts & Literature",
+         "questions": 14,
+         "maxTime": 630,
+         "id": "arts_and_literature"
+      },
+      {
+         "name": "Film & TV",
+         "questions": 11,
+         "maxTime": 495,
+         "id": "film_and_tv"
+      },
+      {
+         "name": "Food & Drink",
+         "questions": 13,
+         "maxTime": 585,
+         "id": "food_and_drink"
+      },
+      {
+         "name": "Geography",
+         "questions": 15,
+         "maxTime": 675,
+         "id": "geography"
+      },
+      {
+         "name": "History",
+         "questions": 15,
+         "maxTime": 675,
+         "id": "history"
+      },
+      {
+         "name": "Music",
+         "questions": 13,
+         "maxTime": 585,
+         "id": "music"
+      },
+      {
+         "name": "Science",
+         "questions": 16,
+         "maxTime": 720,
+         "id": "science"
+      },
+      {
+         "name": "Society & Culture",
+         "questions": 14,
+         "maxTime": 630,
+         "id": "society_and_culture"
+      },
+      {
+         "name": "Sports & Leisure",
+         "questions": 16,
+         "maxTime": 720,
+         "id": "sports_and_leisure"
+      },
+      {
+         "name": "Afro Beats",
+         "questions": 16,
+         "maxTime": 720,
+         "id": "afro_beats"
+      },
+      {
+         "name": "Music",
+         "questions": 13,
+         "maxTime": 585,
+         "id": "music"
+      },
+      {
+         "name": "General Sports",
+         "questions": 17,
+         "maxTime": 765,
+         "id": "general_sports"
+      },
+      {
+         "name": "General Knowlegde",
+         "questions": 14,
+         "maxTime": 630,
+         "id": "general_knowlegde"
+      }
+   ]
+}
