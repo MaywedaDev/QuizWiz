@@ -10,6 +10,8 @@ import { CatalogueComponent } from './catalogue/catalogue.component';
 import { TestpageComponent } from './testpage/testpage.component';
 import { HomeComponent } from './home/home.component';
 import { FilterPipe } from '../resources/filter.pipe';
+import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 
 @NgModule({
@@ -18,7 +20,9 @@ import { FilterPipe } from '../resources/filter.pipe';
     CatalogueComponent,
     TestpageComponent,
     HomeComponent,
-    FilterPipe
+    FilterPipe,
+    PagenotfoundComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

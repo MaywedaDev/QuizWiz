@@ -1,3 +1,4 @@
+<app-navbar *ngIf="state !== 'Started'"></app-navbar>
 <div class="test-page container-fluid mt-3 px-4 d-flex flex-column">
 	<div class="mt-2 py-3 px-3 d-flex justify-content-center align-items-center error" *ngIf="errorMsg">
 		<h2 class="d-inline-block">{{ errorMsg }}</h2>

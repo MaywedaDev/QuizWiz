@@ -1,4 +1,5 @@
 
+<app-navbar></app-navbar>
 <div class="test-page px-3 px-xl-5 container-fluid row justify-content-center">
 	<h1 class="my-2">Quizzes</h1>
 	<div class="col-md-8 col-12 my-2 col-xl-6">
@@ -21,6 +22,9 @@
 					</div>
 				</div>
 			</a>
+		</div>
+		<div *ngIf="(tests | filter:name)?.length === 0" class="mt-5">
+			<h3 class="text-danger text-center">There are no {{ name }} quizzes available</h3>
 		</div>
 	</div>
 </div>
